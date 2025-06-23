@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MITPA CDN — Content Delivery Network for MIT Preparation Academy
 
-## Getting Started
+> 🚀 A modern, responsive content delivery network for MITPA's digital assets.
 
-First, run the development server:
+## Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**MITPA CDN** is a web-based content delivery network built to serve and manage digital assets for the MIT Preparation Academy. The platform provides an intuitive interface for searching, filtering, and accessing various types of files including images and special elements (SEs).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🌟 Purpose
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Provide a centralized repository for MITPA's digital assets
+- Enable easy searching and filtering of content
+- Deliver optimized access to files through a responsive web interface
+- Integrate seamlessly with other MITPA web properties
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 🔍 Advanced Search
+- Real-time search functionality for finding specific files
+- Filter content by type (All, Images, SEs)
+- Adjustable display settings to control how many results are shown
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 📂 File Management
+- Organized categorization of different file types
+- Direct links to access and download files
+- Clear display of file types and names
 
-## Deploy on Vercel
+### 🎨 Modern UI/UX
+- Responsive design that works across devices
+- Intuitive navigation with clear visual hierarchy
+- MITPA-branded interface with consistent styling
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 🔄 Integration
+- Seamless connection with main MITPA website
+- Quick access to MITPA status page
+- Consistent branding and user experience
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🛠️ Tech Stack
+
+- **Next.js** — React framework for server-rendered applications
+- **React** — Frontend library for building user interfaces
+- **TypeScript** — Type-safe JavaScript for improved development
+- **TailwindCSS** — Utility-first CSS framework for styling
+- **FontAwesome** — Icon library for enhanced visual elements
+- **Axios** — Promise-based HTTP client for API requests
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v18 or higher)
+- npm or yarn package manager
+
+### Installation
+1. Clone the repository
+   ```
+   git clone https://github.com/MITPA/cdn.mitpa.tech.git
+   cd cdn.mitpa.tech
+   ```
+
+2. Install dependencies
+   ```
+   npm install
+   ```
+
+3. Run the development server
+   ```
+   npm run dev
+   ```
+
+4. Build for production
+   ```
+   npm run build
+   npm start
+   ```
+
+---
+
+## 📝 License
+This project is licensed under the terms specified in the LICENSE file.

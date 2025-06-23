@@ -1,103 +1,166 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch, faCloud, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { fredoka, montserrat } from "./lib/fonts";
+import { getAllFiles } from "@/utils/All_files";
+import { getImages } from "@/utils/Images";
+import { fetchSEs } from "@/utils/SEs";
+
+export default function CDNWorking() {
+  const [activeTab, setActiveTab] = useState<"All" | "Images" | "SEs">("All");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [files, setFiles] = useState<{ name: string; url: string }[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(3);
+
+  const tabClass = (tab: "All" | "Images" | "SEs") =>
+      `text-sm font-semibold rounded-full px-4 py-2 transition ${
+          activeTab === tab
+              ? "bg-[#c12727] text-white"
+              : "bg-[#7a7a7a] text-gray-300"
+      }`;
+
+  useEffect(() => {
+    const fetchFiles = async () => {
+      setLoading(true);
+      try {
+        let fetchedFiles: { name: string; url: string }[] = [];
+        if (activeTab === "All") {
+          fetchedFiles = await getAllFiles(searchTerm);
+        } else if (activeTab === "Images") {
+          fetchedFiles = await getImages(searchTerm);
+        } else if (activeTab === "SEs") {
+          fetchedFiles = await fetchSEs(searchTerm);
+        }
+        setFiles(fetchedFiles);
+      } catch (error) {
+        console.error("Error fetching files:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFiles();
+  }, [activeTab, searchTerm]);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+      <div
+          className={`min-h-screen flex flex-col justify-between items-center px-6 pt-20 text-base ${montserrat.variable} ${fredoka.variable}`}
+          style={{
+            background: "radial-gradient(circle, #7a1a17 0%, #0f0c0b 80%)",
+          }}
+      >
+        <img
+            alt="MITPA logo"
+            className="mb-4"
+            height={100}
+            src="https://raw.githubusercontent.com/TheusHen/TheusHen/refs/heads/main/src/assets/mitpa.png"
         />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+        <h2
+            className="text-white text-4xl font-extrabold mb-12"
+            style={{ fontFamily: "var(--font-fredoka)" }}
+        >
+          CDN - Working
+        </h2>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+        <div className="w-full max-w-xl bg-[#2f2a28] rounded-2xl px-6 py-5 flex flex-col space-y-4 shadow-lg">
+          <div className="flex items-center space-x-4">
+            <FontAwesomeIcon icon={faSearch} className="text-gray-400 text-xl" />
+            <input
+                className="flex-grow bg-transparent text-gray-300 placeholder-gray-500 text-base focus:outline-none"
+                placeholder="Search for a file here"
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <FontAwesomeIcon icon={faCloud} className="text-gray-400 text-xl" />
+          </div>
+
+          <div className="flex space-x-3 justify-start">
+            {(["All", "Images", "SEs"] as const).map((tab) => (
+                <button
+                    key={tab}
+                    className={tabClass(tab)}
+                    onClick={() => setActiveTab(tab)}
+                >
+                  {tab}
+                </button>
+            ))}
+          </div>
+
+          <div className="flex items-center text-gray-300 space-x-2">
+            <label htmlFor="visibleCount">Show:</label>
+            <input
+                type="number"
+                id="visibleCount"
+                min={1}
+                max={files.length}
+                value={visibleCount}
+                onChange={(e) => setVisibleCount(Number(e.target.value))}
+                className="bg-[#444] text-white text-sm rounded px-2 py-1 w-20 focus:outline-none"
+            />
+            <span>of {files.length} files</span>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        <div className="flex-grow w-full flex flex-col items-center mt-6">
+          <div className="w-full max-w-xl bg-[#2f2a28] rounded-2xl px-6 py-5 mt-6 shadow-lg">
+            {loading ? (
+                <p className="text-gray-300 text-center">Loading...</p>
+            ) : files.length > 0 ? (
+                <div
+                    style={{
+                      maxHeight: "192px",
+                      overflowY: "auto",
+                      scrollbarWidth: "thin",
+                      scrollbarColor: "#555 transparent",
+                    }}
+                >
+                  {files.slice(0, visibleCount).map((file) => {
+                    const nameWithoutExt = file.name
+                        .replace(/\.(\w+)$/, "")
+                        .replace(/\./g, " ");
+                    const fileType =
+                        file.name.split(".").pop()?.toUpperCase() || "FILE";
+                    return (
+                        <a
+                            key={file.url}
+                            href={file.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex justify-between items-center border-b border-gray-600 py-2 px-3 hover:bg-[#3b3533] rounded-md transition text-sm text-gray-200"
+                        >
+                          <span className="truncate">{nameWithoutExt}</span>
+                          <span className="text-gray-400 text-xs">Type: {fileType}</span>
+                        </a>
+                    );
+                  })}
+                </div>
+            ) : (
+                <p className="text-gray-300 text-center">No files found.</p>
+            )}
+          </div>
+        </div>
+
+        <div className="w-full max-w-xl flex justify-between mt-6 pb-6 px-2">
+          <button
+              onClick={() => (window.location.href = "https://mitpa.tech")}
+              className="flex items-center space-x-2 border border-gray-400 text-gray-300 text-sm rounded px-4 py-2 hover:bg-gray-800 transition"
+              type="button"
+          >
+            <FontAwesomeIcon icon={faArrowLeft} className="text-sm" />
+            <span>Go Back</span>
+          </button>
+          <button
+              onClick={() => (window.location.href = "https://status.mitpa.tech")}
+              className="text-sm bg-white text-black rounded px-4 py-2 font-semibold"
+              type="button"
+          >
+            Status Page
+          </button>
+        </div>
+      </div>
   );
 }
