@@ -8,7 +8,7 @@ export async function GET(request: Request) {
     const url = new URL(request.url);
     const searchTerm = url.searchParams.get('q')?.toLowerCase() || '';
     const publicDir = join(process.cwd(), 'public');
-    const baseUrl = 'https://raw.githubusercontent.com/MITPAcademy/cdn.mitpa.tech/refs/heads/src/public';
+    const baseUrl = 'https://cdn.mitpa.tech';
 
     try {
         const files = await readdir(publicDir);
