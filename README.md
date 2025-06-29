@@ -1,19 +1,19 @@
-# MITPA CDN — Content Delivery Network for MIT Preparation Academy
+# PRACTA CDN — Content Delivery Network
 
-> 🚀 A modern, responsive content delivery network for MITPA's digital assets.
+> 🚀 A modern, responsive content delivery network for PRACTA's digital assets.
 
 ## Overview
 
-**MITPA CDN** is a web-based content delivery network built to serve and manage digital assets for the MIT Preparation Academy. The platform provides an intuitive interface for searching, filtering, and accessing various types of files including images and special elements (SEs).
+**PRACTA CDN** is a web-based content delivery network built to serve and manage digital assets for the MIT Preparation Academy. The platform provides an intuitive interface for searching, filtering, and accessing various types of files including images and special elements (SEs).
 
 ---
 
 ## 🌟 Purpose
 
-- Provide a centralized repository for MITPA's digital assets
+- Provide a centralized repository for PRACTA's digital assets
 - Enable easy searching and filtering of content
 - Deliver optimized access to files through a responsive web interface
-- Integrate seamlessly with other MITPA web properties
+- Integrate seamlessly with other PRACTA web properties
 
 ---
 
@@ -32,11 +32,11 @@
 ### 🎨 Modern UI/UX
 - Responsive design that works across devices
 - Intuitive navigation with clear visual hierarchy
-- MITPA-branded interface with consistent styling
+- PRACTA-branded interface with consistent styling
 
 ### 🔄 Integration
-- Seamless connection with main MITPA website
-- Quick access to MITPA status page
+- Seamless connection with main PRACTA website
+- Quick access to PRACTA status page
 - Consistent branding and user experience
 
 ---
@@ -61,8 +61,8 @@
 ### Installation
 1. Clone the repository
    ```
-   git clone https://github.com/MITPA/cdn.mitpa.tech.git
-   cd cdn.mitpa.tech
+   git clone https://github.com/PRACTA/cdn.practa.tech.git
+   cd cdn.practa.tech
    ```
 
 2. Install dependencies

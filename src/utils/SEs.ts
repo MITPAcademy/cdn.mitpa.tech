@@ -7,7 +7,7 @@ interface FileData {
 
 export async function fetchSEs(searchTerm: string = ''): Promise<FileData[]> {
     try {
-        const response = await axios.get<FileData[]>('https://files-mitpa-tech.vercel.app/files');
+        const response = await axios.get<FileData[]>('https://files.practa.tech/files');
 
         const filteredFiles = response.data.filter(file =>
             file.name.toLowerCase().startsWith(searchTerm.toLowerCase())

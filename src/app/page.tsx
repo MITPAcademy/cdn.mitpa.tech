@@ -53,10 +53,10 @@ export default function CDNWorking() {
           }}
       >
         <img
-            alt="MITPA logo"
+            alt="Logo"
             className="mb-4"
             height={100}
-            src="https://raw.githubusercontent.com/TheusHen/TheusHen/refs/heads/main/src/assets/mitpa.png"
+            src="https://practa.tech/Logo.png"
         />
         <h2
             className="text-white text-4xl font-extrabold mb-12"
@@ -146,7 +146,7 @@ export default function CDNWorking() {
 
         <div className="w-full max-w-xl flex justify-between mt-6 pb-6 px-2">
           <button
-              onClick={() => (window.location.href = "https://mitpa.tech")}
+              onClick={() => (window.location.href = "https://practa.tech")}
               className="flex items-center space-x-2 border border-gray-400 text-gray-300 text-sm rounded px-4 py-2 hover:bg-gray-800 transition"
               type="button"
           >
@@ -154,7 +154,7 @@ export default function CDNWorking() {
             <span>Go Back</span>
           </button>
           <button
-              onClick={() => (window.location.href = "https://status.mitpa.tech")}
+              onClick={() => (window.location.href = "https://status.practa.tech")}
               className="text-sm bg-white text-black rounded px-4 py-2 font-semibold"
               type="button"
           >
